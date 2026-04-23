@@ -1,0 +1,955 @@
+/* carta.css - 3D Book Layout */
+
+:root {
+    --color-gold: #D4AF37; /* Metallic Gold */
+    --color-gold-dark: #996515;
+    --color-wood: #3d2b1f;
+    --color-wood-dark: #1a1510;
+    --color-paper: #fcf9f2; /* Creamier paper */
+    --color-paper-dark: #e8dfcc; /* Aged paper for covers */
+    --color-text: #1a1a1a;
+    --color-text-light: #555555;
+    
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Book dimensions */
+    --page-width: 420px;
+    --page-height: 600px;
+    
+    --transition-flip: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-wood-dark);
+    /* Subtle wooden texture background for the table */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    overflow: hidden; /* Prevent scrolling, zooming handled by book */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.carta-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-gold);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(44, 33, 23, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.back-link:hover {
+    background: rgba(44, 33, 23, 0.9);
+    border-color: var(--color-gold);
+    transform: translateX(-5px);
+}
+
+/* Book Container */
+.book-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    --scale: 1;
+}
+
+/* ─── MOBILE VIEWER ─────────────────────────────────────────────────────── */
+/* On mobile the 3D book is hidden; the mobile-viewer shows pages one by one */
+
+.mobile-viewer {
+    display: none;
+    position: absolute;
+    inset: 0 0 72px 0;           /* space for the nav bar */
+    overflow: hidden;
+    /* Wooden table is the body background — visible through here */
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Page card – floats on the wooden table ─── */
+.mobile-page {
+    position: absolute;
+    inset: 12px 10px;            /* breathing room on all sides */
+    border-radius: 3px 14px 14px 3px;
+
+    /* Premium paper texture – identical to .face in the book */
+    background-color: var(--color-paper);
+    background-image:
+        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.025) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+
+    /* Layered shadows for realistic depth on the table */
+    box-shadow:
+        0  2px  4px  rgba(0,0,0,0.12),
+        0  6px  16px rgba(0,0,0,0.22),
+        0 20px  50px rgba(0,0,0,0.35),
+        inset 20px 0 40px -20px rgba(0,0,0,0.08); /* spine shadow */
+
+    /* Left gold border line – spine accent */
+    border-left: 3px solid rgba(212,175,55,0.35);
+
+    overflow: hidden;
+    pointer-events: none;
+
+    /* Slide transition */
+    opacity: 0;
+    transform: translateX(15px) scale(0.99);
+    transition:
+        opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94),
+        transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.mobile-page.active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+}
+
+
+
+
+
+/* Override page-content padding for mobile — give more vertical room */
+.mobile-page .page-content {
+    padding: 2.2rem 1.8rem 1.8rem;
+}
+
+/* ── Cover & Back Cover ─────────────────────── */
+.mobile-page.leaf-cover,
+.mobile-page.back-cover {
+    background-color: var(--color-paper-dark);
+    background-image:
+        linear-gradient(145deg, rgba(255,255,255,0.08) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.99' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+    border-left-color: rgba(212,175,55,0.6);
+    border-radius: 3px 14px 14px 3px;
+    box-shadow:
+        0  4px  8px  rgba(0,0,0,0.25),
+        0 12px  30px rgba(0,0,0,0.45),
+        0 30px  70px rgba(0,0,0,0.5);
+}
+
+/* Cover layout is already styled via .cover-content — just fix sizing */
+.mobile-page.leaf-cover .cover-content,
+.mobile-page.back-cover .cover-content,
+.mobile-page.back-cover .inner-aesthetic {
+    height: 100%;
+    padding: 2rem 1.5rem;
+}
+
+.mobile-page.leaf-cover .carta-logo {
+    height: clamp(80px, 18vh, 130px);
+    margin-bottom: 1.2rem;
+}
+
+.mobile-page.leaf-cover .deer-artwork {
+    width: clamp(160px, 55%, 240px);
+    margin: 0.8rem 0;
+}
+
+.mobile-page.leaf-cover .divider {
+    width: 40px;
+    margin: 1rem 0;
+}
+
+/* ── Interior pages – override page-content for mobile ── */
+.mobile-page .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+.mobile-page .menu-item {
+    margin-bottom: 1rem;
+}
+
+.mobile-page .item-name {
+    font-size: 0.95rem;
+}
+
+.mobile-page .item-desc {
+    font-size: 0.78rem;
+    line-height: 1.4;
+}
+
+/* Page number position */
+.mobile-page .page-number {
+    position: absolute;
+    bottom: 1.2rem;
+    font-size: 0.72rem;
+    color: var(--color-gold-dark);
+    font-family: var(--font-heading);
+    font-style: italic;
+}
+.mobile-page .page-number.right { right: 1.8rem; }
+.mobile-page .page-number.left  { left:  1.8rem; }
+
+/* ── Dark pages – Vinos, Postres oscuros ── */
+.mobile-page.dark {
+    background-color: var(--color-wood);
+    background-image:
+        linear-gradient(145deg, rgba(255,255,255,0.04) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    border-left-color: rgba(212,175,55,0.5);
+}
+
+/* ── Inner aesthetic (Intro page) ── */
+.mobile-page .inner-aesthetic {
+    height: 100%;
+    padding: 2rem 1.5rem;
+}
+
+.mobile-page .watermark-logo {
+    height: clamp(80px, 18vh, 130px);
+}
+
+/* ── Scroll fade at bottom (hint more content below) ── */
+.mobile-page::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(252,249,242,0.6));
+    pointer-events: none;
+    border-radius: 0 0 14px 0;
+}
+
+.mobile-page.leaf-cover::after,
+.mobile-page.back-cover::after,
+.mobile-page.dark::after {
+    display: none; /* no fade on dark/cover pages */
+}
+
+/* ── On mobile: show viewer, hide 3D book ── */
+@media (max-width: 840px) {
+    .mobile-viewer {
+        display: flex;
+    }
+    .book {
+        display: none !important;
+    }
+    
+    /* ── Navbar y Botonera inferior móvil ── */
+    .carta-nav {
+        top: auto;
+        bottom: 30px;
+        left: 15px;
+        width: auto;
+        padding: 0;
+        z-index: 60;
+    }
+    .back-link {
+        padding: 0;
+        border-radius: 50%;
+        background: rgba(20, 15, 10, 0.9);
+        border: 1px solid rgba(197, 160, 89, 0.3);
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .back-link-text {
+        display: none; /* Oculta el texto "Volver al Inicio" */
+    }
+    .back-link svg {
+        margin: 0;
+    }
+    .page-counter {
+        display: none !important;
+    }
+    .book-nav {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        /* Restaurar el tamaño original ancho pero prevenir colisión con el botón back */
+        left: auto;
+        right: 15px;
+        transform: none;
+        width: calc(100% - 75px);
+        max-width: 320px;
+        padding: 0.6rem;
+        gap: 0;
+    }
+    .nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+/* Navigation overlay */
+.book-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(20, 15, 10, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    color: #fff;
+}
+
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-counter {
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: var(--font-body);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 80px;
+    text-align: center;
+}
+/* The Book itself */
+.book {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: calc(var(--page-width) * 2);
+    height: var(--page-height);
+    /*
+     * perspective() is in the transform so the parent overflow:hidden
+     * can still clip the 3D-transformed leaves cleanly.
+     * --offset-x shifts the book (in pre-scale layout px) so the active
+     * page half is visually centred in the container.
+     */
+    --offset-x: 0px;
+    transform: perspective(2500px) translate(calc(-50% + var(--offset-x)), -50%) scale(var(--scale));
+    transform-origin: center center;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Leaf (physical page) */
+.leaf {
+    position: absolute;
+    top: 0;
+    /* The leaf is anchored to its spine, which is in the exact center of the book */
+    left: var(--page-width);
+    width: var(--page-width);
+    height: var(--page-height);
+    transform-origin: left center;
+    transform-style: preserve-3d;
+    transition: var(--transition-flip);
+    cursor: pointer;
+}
+
+.leaf.flipped {
+    transform: rotateY(-180deg);
+}
+
+/* Faces */
+.face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-color: var(--color-paper);
+    overflow: hidden;
+    
+    /* Premium Paper Texture Layered */
+    background-image: 
+        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.02) 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
+    
+    /* Elegant border for the page */
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Spine Shading & Borders */
+/* Front faces hinge is on their LEFT side */
+.leaf .front {
+    border-radius: 2px 12px 12px 2px;
+    /* Subtler spine shading + edge vignette */
+    box-shadow: 
+        inset 25px 0 35px -15px rgba(0,0,0,0.1),
+        inset -5px 0 15px rgba(0,0,0,0.01),
+        3px 3px 15px rgba(0,0,0,0.15);
+}
+
+/* Back faces rotate so their hinge visually is on the RIGHT side */
+.leaf .back {
+    transform: rotateY(180deg);
+    border-radius: 12px 2px 2px 12px;
+    /* Subtler spine shading + edge vignette */
+    box-shadow: 
+        inset -25px 0 35px -15px rgba(0,0,0,0.1),
+        inset 5px 0 15px rgba(0,0,0,0.01),
+        -3px 3px 15px rgba(0,0,0,0.15);
+}
+
+/* Hard cover styling */
+.leaf-cover, .back-cover {
+    background-color: var(--color-paper-dark);
+    /* Rich Leather/Fabric Texture for Covers */
+    background-image: 
+        linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.99' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect on pages indicating they can be turned */
+.leaf .front:hover, .leaf.flipped .back:hover {
+    box-shadow: inset 20px 0 30px rgba(0,0,0,0.1), 5px 5px 20px rgba(0,0,0,0.25);
+}
+.leaf.flipped .back:hover {
+    box-shadow: inset -20px 0 30px rgba(0,0,0,0.1), -5px 5px 20px rgba(0,0,0,0.25);
+}
+
+
+/* Layout inside faces */
+
+/* ── Cover Layout ── */
+.cover-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 1rem;
+    text-align: center;
+}
+
+.carta-logo {
+    height: 120px;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.carta-logo.small {
+    height: 40px;
+    opacity: 0.5;
+}
+
+.cover-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--color-wood);
+    letter-spacing: 0.15em;
+    margin: 0;
+    font-weight: 400;
+}
+
+.divider {
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-gold);
+    margin: 1.5rem 0;
+}
+
+.cover-subtitle, .back-text {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.deer-artwork {
+    width: 60%;
+    mix-blend-mode: multiply;
+    opacity: 0.85;
+    filter: sepia(10%) contrast(1.1);
+    margin: 1rem 0;
+}
+
+/* ── Inner aesthetic page (Intro & Indice) ── */
+.inner-aesthetic {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    padding: 3rem;
+}
+
+.watermark-logo {
+    height: 150px;
+    opacity: 0.05;
+    margin-bottom: 1rem;
+}
+
+/* ── Index Page Styles ── */
+.index-page {
+    justify-content: center;
+    padding: 2.5rem 3rem;
+}
+
+.index-logo {
+    width: 90px;
+    height: auto;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.index-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.index-item {
+    display: flex;
+    align-items: baseline;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: var(--font-serif);
+    color: var(--color-text-light);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.index-item:hover {
+    color: var(--color-gold);
+    transform: scale(1.02);
+}
+
+.index-name {
+    white-space: nowrap;
+    letter-spacing: 1px;
+}
+
+.index-dots {
+    flex: 1;
+    border-bottom: 2px dotted rgba(212,175,55,0.4);
+    margin: 0 0.5rem;
+    position: relative;
+    top: -4px;
+}
+
+.index-pg {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    font-style: italic;
+}
+
+.inner-aesthetic-text {
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.inner-aesthetic-text p {
+    font-style: italic;
+    color: var(--color-text-light);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Standard Page Layout */
+.page-content {
+    padding: 2.2rem 2.5rem;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content.center-vert {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--color-gold-dark);
+    font-family: var(--font-heading);
+    font-style: italic;
+}
+
+.page-number.right {
+    right: 2rem;
+}
+
+.page-number.left {
+    left: 2rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.7rem;
+    color: var(--color-wood);
+    text-align: center;
+    margin-bottom: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.section-title:first-of-type {
+    margin-top: 0;
+}
+
+/* Menu items */
+.menu-item {
+    margin-bottom: 0.7rem;
+}
+
+.item-header {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.2rem;
+}
+
+.item-name {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-wood);
+    font-weight: 600;
+    margin: 0;
+}
+
+.item-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted rgba(0,0,0,0.2);
+    margin: 0 8px;
+    position: relative;
+    top: -4px;
+}
+
+.item-price {
+    font-family: var(--font-body);
+    font-weight: 500;
+    color: var(--color-gold-dark);
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.item-desc {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    line-height: 1.3;
+}
+
+.page-divider {
+    height: 1px;
+    width: 60%;
+    margin: 2rem auto;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    opacity: 0.5;
+}
+
+/* Decorative Icon on bottom of page */
+.decorative-icon {
+    margin-top: auto;
+    text-align: center;
+}
+.decorative-icon img {
+    height: 40px;
+    mix-blend-mode: multiply;
+    opacity: 0.3;
+}
+
+/* Notes section */
+.notes-box {
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    padding: 2rem;
+    border-radius: 8px;
+    background: rgba(197, 160, 89, 0.05);
+}
+
+.notes-logo {
+    height: 30px;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
+.notes-box .disclaimer {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+}
+
+.contact-line {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-wood);
+    font-size: 0.9rem;
+}
+
+/* Dark Theme Pages (Vinos y Bebidas) */
+.leaf-page.dark {
+    background-color: var(--color-wood);
+    color: var(--color-paper);
+}
+
+.leaf-page.dark .section-title {
+    color: var(--color-gold);
+}
+
+.leaf-page.dark .item-name {
+    color: var(--color-paper);
+}
+
+.leaf-page.dark .item-dots {
+    border-bottom: 1px dotted rgba(253, 251, 247, 0.2);
+}
+
+.leaf-page.dark .item-price {
+    color: var(--color-gold);
+}
+
+.leaf-page.dark .item-desc {
+    color: rgba(253, 251, 247, 0.6);
+}
+
+.leaf-page.dark .page-divider.light {
+    background: linear-gradient(90deg, transparent, rgba(253, 251, 247, 0.3), transparent);
+}
+
+/* Preloader (Common with Index) */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-wood-dark); /* Slightly darker for carta */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.loader-logo {
+    height: 80px;
+    filter: brightness(0) invert(1);
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: var(--color-gold);
+    animation: loading 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes loading {
+    0% { left: -40%; }
+    100% { left: 100%; }
+}
+
+/* Custom Corzo Footprint Cursor – matches main site */
+@media (pointer: fine) {
+    body, a, button, .nav-btn, .back-link, .leaf {
+        cursor: url('assets/images/cursor_corzo.svg') 12 10,
+               url('assets/images/cursor_corzo.png') 12 10, auto !important;
+    }
+    .nav-btn:disabled {
+        cursor: url('assets/images/cursor_corzo.svg') 12 10,
+               url('assets/images/cursor_corzo.png') 12 10, not-allowed !important;
+    }
+}
+
+/* Hard override for mobile navigation overlay visibility */
+@media (max-width: 600px) {
+    .page-content {
+        padding: 2rem 1.2rem;
+    }
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    .menu-item {
+        margin-bottom: 0.8rem;
+    }
+    .item-name {
+        font-size: 0.9rem;
+    }
+    .item-price {
+        font-size: 0.85rem;
+    }
+    .item-desc {
+        font-size: 0.75rem;
+    }
+    .book-nav {
+        width: 90%;
+        gap: 0.5rem;
+        bottom: 15px;
+    }
+    .page-counter {
+        font-size: 0.75rem;
+        min-width: 50px;
+    }
+}
+/* Menú Degustación Specific Styles */
+.menu-degustacion-box {
+    text-align: center;
+    padding: 0;
+    margin-top: -0.8rem;
+}
+
+.price-big {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.subtitle-deg {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--color-text-light);
+    margin-bottom: 1.2rem;
+}
+
+.submenu-title {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-gold-dark);
+    margin: 0.8rem 0 0.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.submenu-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: var(--color-gold);
+    opacity: 0.4;
+}
+
+.deg-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.deg-list li {
+    font-size: 0.88rem;
+    color: var(--color-text);
+    margin-bottom: 0.3rem;
+    font-style: italic;
+}
+
+.deg-list.small li {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+}
+
+@media (max-width: 840px) {
+    .price-big {
+        font-size: 2.5rem;
+    }
+    .deg-list li {
+        font-size: 0.82rem;
+    }
+}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso Legal, Privacidad y Cookies | La Zaranda</title>
+    <meta name="description" content="Aviso Legal, Política de Privacidad y Política de Cookies de La Zaranda, Espacio Gastronómico en Ciudad Real.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon_corzo.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon_corzo.png">
+    <style>
+        :root {
+            --color-legal-bg: #0f0a06;
+            --color-legal-surface: #1e150d;
+            --color-legal-accent: #C5A059;
+            --color-legal-text: #e0d5c8;
+            --color-legal-muted: #a0958a;
+        }
+
+        html { background-color: var(--color-legal-bg); scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; }
+
+        /* --- Navbar Upgrade --- */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(15, 10, 6, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo img { 
+            height: 50px !important; 
+            width: auto !important;
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.2));
+            transition: transform 0.3s ease;
+        }
+        .nav-logo:hover img { transform: scale(1.05); }
+        
+        .nav-links-legal a {
+            color: var(--color-legal-accent);
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .nav-links-legal a:hover {
+            background: var(--color-legal-accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* --- Content Layout --- */
+        .legal-page {
+            min-height: 100vh;
+            background-color: var(--color-legal-bg);
+            padding-top: 130px;
+            padding-bottom: 100px;
+            color: var(--color-legal-text);
+        }
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header section */
+        .legal-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        .legal-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--color-legal-accent);
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+        .legal-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            color: var(--color-legal-accent);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .legal-header p {
+            color: var(--color-legal-muted);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* TOC Card */
+        .legal-toc {
+            background: var(--color-legal-surface);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .legal-toc p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            color: var(--color-legal-accent);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+        .legal-toc ol {
+            padding-left: 0;
+            margin: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .legal-toc li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+        .legal-toc a {
+            color: var(--color-legal-muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            display: block;
+            padding: 0.3rem 0;
+        }
+        .legal-toc a:hover { 
+            color: var(--color-legal-accent); 
+            transform: translateX(5px);
+        }
+
+        /* Content Blocks */
+        .legal-block {
+            margin-bottom: 5rem;
+            background: rgba(255,255,255,0.02);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .legal-block-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--color-legal-accent);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .legal-block-title-line {
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(197,160,89,0.4), transparent);
+        }
+
+        .legal-section { margin-bottom: 2.5rem; }
+        .legal-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--color-legal-accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .legal-section p, .legal-section li {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-legal-muted);
+            margin-bottom: 1rem;
+        }
+        .legal-section strong { color: var(--color-legal-text); }
+
+        .legal-highlight {
+            background: rgba(197,160,89,0.08);
+            border-left: 3px solid var(--color-legal-accent);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .cookie-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .cookie-table th {
+            background: rgba(197,160,89,0.15);
+            color: var(--color-legal-accent);
+            padding: 1rem;
+            text-align: left;
+        }
+        .cookie-table td {
+            color: var(--color-legal-muted);
+            padding: 0.8rem 1rem;
+            border-top: 1px solid rgba(197,160,89,0.05);
+        }
+        @media (max-width: 768px) {
+            .legal-toc ol { grid-template-columns: 1fr; }
+            .legal-block { padding: 1.5rem; }
+            .navbar { height: 70px; }
+        }
+
+        footer {
+            background: var(--color-legal-bg);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(197, 160, 89, 0.1);
+            text-align: center;
+            color: var(--color-legal-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--color-legal-accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="assets/images/logo.png" alt="La Zaranda Logo">
+            </a>
+            <div class="nav-links-legal">
+                <a href="index.html">← Volver al inicio</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="legal-page">
+        <div class="legal-container">
+
+            <div class="legal-header">
+                <h1>Legal</h1>
+                <p>Aviso Legal &nbsp;·&nbsp; Política de Privacidad &nbsp;·&nbsp; Política de Cookies</p>
+                <p>Última actualización: abril de 2026</p>
+            </div>
+
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- BLOQUE 1: AVISO LEGAL                   -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="legal-block" id="aviso-legal">
+                <h2 class="legal-block-title">Aviso Legal <div class="legal-block-title-line"></div></h2>
+
+                <div class="legal-section" id="identificacion">
+                    <h3>1. Identificación del Titular</h3>
+                    <p>En cumplimiento del artículo 10 de la <strong>Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE)</strong>, se facilita la siguiente información:</p>
+                    <div class="legal-highlight">
+                        <p><strong>Razón social / Nombre comercial:</strong> Andrés Rodríguez Sánchez (Restaurante La Zaranda)</p>
+                        <p><strong>CIF / NIF:</strong> 05667796K</p>
+                        <p><strong>Domicilio social:</strong> Paseo de Dulcinea del Toboso, n 2, 13001 Ciudad Real, España</p>
+                        <p><strong>Teléfono de contacto:</strong> <a href="tel:+34661587499" style="color:var(--color-primary);text-decoration:none;">661 58 74 99</a></p>
+                        <p><strong>Correo electrónico:</strong> <a href="mailto:rodriguezsanchez_andres@yahoo.es" style="color:var(--color-primary);text-decoration:none;">rodriguezsanchez_andres@yahoo.es</a></p>
+                        <p><strong>Sitio web:</strong> www.lazaranda.es</p>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h3>2. Objeto y Ámbito de Aplicación</h3>
+                    <p>El presente documento regula el acceso y uso del sitio web de <strong>La Zaranda</strong>, cuya finalidad es ofrecer información sobre el establecimiento gastronómico, su carta, historia y servicio de reservas.</p>
+                    <p>El acceso implica la aceptación plena y sin reservas de las presentes condiciones. Si no está de acuerdo, debe abandonar el sitio web.</p>
+                </div>
+
+                <div class="legal-section" id="propiedad-intelectual">
+                    <h3>3. Propiedad Intelectual e Industrial</h3>
+                    <p>Todos los contenidos del sitio web —textos, fotografías, imágenes, logotipos, marcas, diseño gráfico y código fuente— son propiedad de <strong>La Zaranda</strong> o de sus licenciantes, y están protegidos por la legislación sobre <strong>Propiedad Intelectual e Industrial</strong>.</p>
+                    <p>Queda expresamente prohibida su reproducción, distribución, comunicación pública o transformación sin autorización escrita del titular. El uso no autorizado podrá dar lugar a las acciones legales que procedan.</p>
+                </div>
+
+                <div class="legal-section" id="condiciones-uso">
+                    <h3>4. Condiciones de Acceso y Uso</h3>
+                    <p>El usuario se compromete a:</p>
+                    <ul>
+                        <li>Hacer un uso lícito del sitio web, conforme a la legislación vigente y el orden público.</li>
+                        <li>No realizar actividades dañinas que inutilicen o sobrecarguen los sistemas del titular.</li>
+                        <li>No introducir virus u otros programas maliciosos.</li>
+                        <li>No utilizar el sitio con fines ilícitos o contrarios a los derechos de terceros.</li>
+                    </ul>
+                </div>
+
+                <div class="legal-section">
+                    <h3>5. Exclusión de Responsabilidad</h3>
+                    <p><strong>La Zaranda</strong> no se hace responsable de daños derivados de interrupciones del servicio, errores en la información o contenidos de páginas externas enlazadas. El titular puede modificar o eliminar contenidos en cualquier momento sin previo aviso.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>6. Legislación Aplicable y Jurisdicción</h3>
+                    <p>Este Aviso Legal se rige por la legislación española. Para la resolución de controversias, las partes se someten a los <strong>Juzgados y Tribunales de Ciudad Real</strong>, salvo que la normativa establezca un fuero imperativo distinto.</p>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- BLOQUE 2: POLÍTICA DE PRIVACIDAD        -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="legal-block" id="privacidad">
+                <h2 class="legal-block-title">Política de Privacidad <div class="legal-block-title-line"></div></h2>
+
+                <div class="legal-section">
+                    <h3>1. Marco Legal</h3>
+                    <p>El tratamiento de datos personales se realiza conforme al <strong>Reglamento (UE) 2016/679 (RGPD)</strong> y la <strong>Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)</strong>.</p>
+                </div>
+
+                <div class="legal-section" id="datos-personales">
+                    <h3>2. Responsable del Tratamiento</h3>
+                    <div class="legal-highlight">
+                        <p><strong>Responsable:</strong> Andrés Rodríguez Sánchez</p>
+                        <p><strong>NIF:</strong> 05667796K</p>
+                        <p><strong>Dirección:</strong> Paseo de Dulcinea del Toboso, n 2, 13001 Ciudad Real</p>
+                        <p><strong>Email de contacto (privacidad):</strong> <a href="mailto:rodriguezsanchez_andres@yahoo.es" style="color:var(--color-primary);text-decoration:none;">rodriguezsanchez_andres@yahoo.es</a></p>
+                    </div>
+                </div>
+
+                <div class="legal-section">
+                    <h3>3. Finalidades del Tratamiento y Base Legitimadora</h3>
+                    <table class="cookie-table">
+                        <thead>
+                            <tr>
+                                <th>Finalidad</th>
+                                <th>Base jurídica</th>
+                                <th>Plazo de conservación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Gestión de reservas de mesa</td>
+                                <td>Ejecución de contrato (art. 6.1.b RGPD)</td>
+                                <td>Hasta 5 años tras la última reserva</td>
+                            </tr>
+                            <tr>
+                                <td>Atención al cliente y consultas</td>
+                                <td>Interés legítimo (art. 6.1.f RGPD)</td>
+                                <td>1 año desde la solicitud</td>
+                            </tr>
+                            <tr>
+                                <td>Envío de comunicaciones comerciales (si se consiente)</td>
+                                <td>Consentimiento (art. 6.1.a RGPD)</td>
+                                <td>Hasta revocación del consentimiento</td>
+                            </tr>
+                            <tr>
+                                <td>Cumplimiento de obligaciones legales</td>
+                                <td>Obligación legal (art. 6.1.c RGPD)</td>
+                                <td>Según normativa aplicable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="legal-section">
+                    <h3>4. Destinatarios de los Datos</h3>
+                    <p>Los datos personales <strong>no serán cedidos a terceros</strong>, salvo obligación legal o cuando sea estrictamente necesario para la prestación del servicio (p. ej., proveedores de correo electrónico utilizado para la gestión de reservas). En tal caso, se exigirá a dichos proveedores el cumplimiento de las garantías del RGPD.</p>
+                    <p>No se realizan transferencias internacionales de datos fuera del Espacio Económico Europeo.</p>
+                </div>
+
+                <div class="legal-section" id="derechos">
+                    <h3>5. Derechos del Interesado</h3>
+                    <p>El usuario puede ejercer, en cualquier momento, los siguientes derechos reconocidos por el RGPD:</p>
+                    <ul>
+                        <li><strong>Acceso:</strong> conocer qué datos personales se tratan.</li>
+                        <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos.</li>
+                        <li><strong>Supresión («derecho al olvido»):</strong> solicitar la eliminación de datos.</li>
+                        <li><strong>Limitación:</strong> solicitar la restricción del tratamiento.</li>
+                        <li><strong>Portabilidad:</strong> recibir los datos en formato estructurado.</li>
+                        <li><strong>Oposición:</strong> oponerse al tratamiento basado en interés legítimo.</li>
+                        <li><strong>Revocación del consentimiento:</strong> sin efecto retroactivo.</li>
+                    </ul>
+                    <p>Para ejercerlos, diríjase a: <a href="mailto:rodriguezsanchez_andres@yahoo.es" style="color:var(--color-primary);text-decoration:none;">rodriguezsanchez_andres@yahoo.es</a>, acompañando copia de su DNI o documento identificativo equivalente.</p>
+                    <p>Asimismo, tiene derecho a presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong> en <a href="https://www.aepd.es" target="_blank" rel="noopener" style="color: var(--color-primary);">www.aepd.es</a>.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>6. Medidas de Seguridad</h3>
+                    <p>La Zaranda ha adoptado las medidas técnicas y organizativas necesarias para garantizar la seguridad, integridad y confidencialidad de los datos personales, de conformidad con el artículo 32 del RGPD, con el fin de evitar su alteración, pérdida, tratamiento o acceso no autorizado.</p>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- BLOQUE 3: POLÍTICA DE COOKIES           -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="legal-block" id="cookies">
+                <h2 class="legal-block-title">Política de Cookies <div class="legal-block-title-line"></div></h2>
+
+                <div class="legal-section">
+                    <h3>1. ¿Qué son las cookies?</h3>
+                    <p>Las cookies son pequeños archivos de texto que se almacenan en el dispositivo del usuario cuando visita un sitio web. Permiten recordar información sobre la visita para mejorar la experiencia de navegación.</p>
+                    <p>Esta Política se aplica de conformidad con el artículo 22.2 de la <strong>LSSI-CE</strong> y la <strong>Guía sobre el uso de cookies de la AEPD (actualización 2023)</strong>.</p>
+                </div>
+
+                <div class="legal-section" id="tipos-cookies">
+                    <h3>2. Tipos de Cookies Utilizadas</h3>
+                    <table class="cookie-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre / Origen</th>
+                                <th>Tipo</th>
+                                <th>Finalidad</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cookies de sesión propias</td>
+                                <td>Técnica / Estrictamente necesaria</td>
+                                <td>Asegurar el correcto funcionamiento del sitio (navegación, formularios)</td>
+                                <td>Sesión</td>
+                            </tr>
+                            <tr>
+                                <td>_ga, _gid (Google Analytics)</td>
+                                <td>Analítica (terceros)</td>
+                                <td>Medición estadística anónima de visitas y comportamiento del usuario</td>
+                                <td>2 años / 24h</td>
+                            </tr>
+                            <tr>
+                                <td>Google Maps (iframe embed)</td>
+                                <td>Funcionalidad (terceros)</td>
+                                <td>Mostrar el mapa de ubicación del restaurante</td>
+                                <td>Variable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Las cookies estrictamente necesarias no requieren consentimiento previo. Las de analítica y funcionalidad de terceros se activarán únicamente si el usuario las acepta a través del banner de cookies.</p>
+                </div>
+
+                <div class="legal-section" id="gestion-cookies">
+                    <h3>3. Gestión y Desactivación de Cookies</h3>
+                    <p>El usuario puede configurar su navegador para rechazar o eliminar las cookies. A continuación se facilitan los enlaces de configuración de los navegadores más habituales:</p>
+                    <ul>
+                        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener" style="color: var(--color-primary);">Google Chrome</a></li>
+                        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener" style="color: var(--color-primary);">Mozilla Firefox</a></li>
+                        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener" style="color: var(--color-primary);">Safari</a></li>
+                        <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener" style="color: var(--color-primary);">Microsoft Edge</a></li>
+                    </ul>
+                    <p><strong>Advertencia:</strong> la desactivación de algunas cookies puede afectar al correcto funcionamiento del sitio web.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h3>4. Actualizaciones de esta Política</h3>
+                    <p>La Zaranda puede actualizar esta Política de Cookies en cualquier momento para adaptarla a novedades legislativas o cambios en los servicios del sitio. Se recomienda revisarla periódicamente. La fecha de la última actualización figura en el encabezado de esta página.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 La Zaranda. Todos los derechos reservados. | <a href="aviso_legal.html" style="color: var(--color-primary); text-decoration: none;">Aviso Legal</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

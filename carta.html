@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta y Menú de Caza | Restaurante La Zaranda | Almagro y Ciudad Real</title>
+    <meta name="description" content="Explora la carta de La Zaranda: Especialidades en carne de caza de la provincia de Ciudad Real, cocina manchega y platos gourmet en Almagro y alrededores.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon_corzo.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon_corzo.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="carta.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="assets/images/logo.png" alt="La Zaranda Logo" class="loader-logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Navbar / Back button -->
+    <nav class="carta-nav">
+        <a href="index.html" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+            </svg>
+            <span class="back-link-text">Volver al Inicio</span>
+        </a>
+    </nav>
+
+    <div class="book-container">
+        
+        <!-- Mobile Page Viewer (visible only on mobile, built by JS) -->
+        <div class="mobile-viewer" id="mobileViewer"></div>
+
+        <div class="book-nav">
+            <button id="prevBtn" class="nav-btn" aria-label="Página anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                Anterior
+            </button>
+            <span id="pageCounter" class="page-counter">Cubierta</span>
+            <button id="nextBtn" class="nav-btn" aria-label="Página siguiente">
+                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+        </div>
+
+        <div class="book" id="book">
+            
+            <!-- LEAF 1: Cover & Inner Cover -->
+            <div class="leaf" data-leaf="0">
+                <!-- Front: Main Cover -->
+                <div class="face front leaf-cover">
+                    <div class="cover-content">
+                        <img src="assets/images/logo.png" alt="La Zaranda Logo" class="carta-logo">
+                        <img src="assets/images/ciervolazaranda.png" alt="Ilustración Ciervo" class="deer-artwork">
+                        <p class="cover-subtitle">Tradición y Vanguardia</p>
+                    </div>
+                </div>
+                <!-- Back: Inner Cover (Índice) -->
+                <div class="face back leaf-inner">
+                    <div class="inner-aesthetic index-page">
+                        <img src="assets/images/logo.png" alt="Logo La Zaranda" class="index-logo">
+                        <h2 class="section-title">Índice</h2>
+                        <ul class="index-list">
+                            <li class="index-item" data-mobile="2" data-desktop="1">
+                                <span class="index-name">Ensaladas</span><span class="index-dots"></span><span class="index-pg">1</span>
+                            </li>
+                            <li class="index-item" data-mobile="3" data-desktop="1">
+                                <span class="index-name">Algo más</span><span class="index-dots"></span><span class="index-pg">2</span>
+                            </li>
+                            <li class="index-item" data-mobile="4" data-desktop="2">
+                                <span class="index-name">Pescados y Mariscos</span><span class="index-dots"></span><span class="index-pg">3</span>
+                            </li>
+                            <li class="index-item" data-mobile="6" data-desktop="3">
+                                <span class="index-name">Nuestras Carnes</span><span class="index-dots"></span><span class="index-pg">5</span>
+                            </li>
+                            <li class="index-item" data-mobile="8" data-desktop="4">
+                                <span class="index-name">Nos vamos de Caza</span><span class="index-dots"></span><span class="index-pg">7</span>
+                            </li>
+                            <li class="index-item" data-mobile="9" data-desktop="4">
+                                <span class="index-name">Menú Degustación</span><span class="index-dots"></span><span class="index-pg">8</span>
+                            </li>
+                            <li class="index-item" data-mobile="10" data-desktop="5">
+                                <span class="index-name">Postres</span><span class="index-dots"></span><span class="index-pg">9</span>
+                            </li>
+                            <li class="index-item" data-mobile="11" data-desktop="5">
+                                <span class="index-name">Vinos Tintos</span><span class="index-dots"></span><span class="index-pg">10</span>
+                            </li>
+                            <li class="index-item" data-mobile="13" data-desktop="6">
+                                <span class="index-name">Blancos y Bebidas</span><span class="index-dots"></span><span class="index-pg">12</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 2: Ensaladas y Algo más -->
+            <div class="leaf" data-leaf="1">
+                <div class="face front leaf-page">
+                    <div class="page-content">
+                        <span class="page-number right">1</span>
+                        <h2 class="section-title">Ensaladas</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Gourmet</h3><div class="item-dots"></div><span class="item-price">14€</span></div><p class="item-desc">Tomate, cebolla morada y pimiento rojo asado. Alérgenos: sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Perdiz</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Lechuga escabechada, tomate y cítricos. Alérgenos: sulfitos, mostaza</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Burrata</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Tomate, burrata, sésamo negro y cebolla frita. Alérgenos: lácteos, sésamo, gluten</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Ensaladilla rusa</h3><div class="item-dots"></div><span class="item-price">12€</span></div><p class="item-desc">Con un toque de marisco. Alérgenos: huevos, crustáceos, moluscos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tomate aliñado</h3><div class="item-dots"></div><span class="item-price">10€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Ventresca</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Tomate, ventresca y cebolla morada. Alérgenos: pescado, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Taco de bonito</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: pescado, gluten</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Verduritas en tempura</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: gluten, mostaza</p></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page">
+                    <div class="page-content">
+                        <span class="page-number left">2</span>
+                        <h2 class="section-title">Algo más</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Jamón ibérico</h3><div class="item-dots"></div><span class="item-price">20€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Croquetas de rabo de toro</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Alérgenos: gluten, lácteos, huevos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Queso manchego</h3><div class="item-dots"></div><span class="item-price">14€</span></div><p class="item-desc">Alérgenos: lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Revuelto de boletus</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: huevos, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Flor de alcachofa con foie de pato</h3><div class="item-dots"></div><span class="item-price">4€</span></div><p class="item-desc">Alérgenos: huevos, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Croquetas de jamón ibérico</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: gluten, lácteos, huevos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Huevos rotos con jamón</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Alérgenos: huevos, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Mus de pato con mermelada</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Patatas Casa Lucio</h3><div class="item-dots"></div><span class="item-price">12€</span></div><p class="item-desc">Alérgenos: huevos, sulfitos</p></article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 3: Pescados y Mariscos (2 páginas) -->
+            <div class="leaf" data-leaf="2">
+                <div class="face front leaf-page">
+                    <div class="page-content">
+                        <span class="page-number right">3</span>
+                        <h2 class="section-title">Pescados y Mariscos</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tataki de atún rojo</h3><div class="item-dots"></div><span class="item-price">19€</span></div><p class="item-desc">Alérgenos: pescado, soja</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Calamar a la plancha</h3><div class="item-dots"></div><span class="item-price">20€</span></div><p class="item-desc">Nacional. Alérgenos: moluscos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Zamburiñas</h3><div class="item-dots"></div><span class="item-price">3€/Ud</span></div><p class="item-desc">Alérgenos: moluscos, crustáceos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Bacalao a la riojana</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">Alérgenos: pescado, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Boquerones fritos</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: pescado, gluten</p></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page">
+                    <div class="page-content">
+                        <span class="page-number left">4</span>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Mejillones al vapor</h3><div class="item-dots"></div><span class="item-price">14€</span></div><p class="item-desc">Alérgenos: moluscos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Bacalao del barquero</h3><div class="item-dots"></div><span class="item-price">20€</span></div><p class="item-desc">Tataki con cama de tomate rallado. Alérgenos: pescado</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tartar de atún rojo</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">Con fondo de aguacate. Alérgenos: pescado, soja, sésamo</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Pulpo a la brasa</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">Con crema de patata. Alérgenos: moluscos, lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Morritos de bacalao</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Alérgenos: pescado, moluscos</p></article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 4: Nuestras Carnes (2 páginas) -->
+            <div class="leaf" data-leaf="3">
+                <div class="face front leaf-page">
+                    <div class="page-content">
+                        <span class="page-number right">5</span>
+                        <h2 class="section-title">Nuestras Carnes</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Torrezno de Soria</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Alérgenos: lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Molleja de cordero lechal</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">Alérgenos: lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Entrecot de vaca</h3><div class="item-dots"></div><span class="item-price">22€</span></div><p class="item-desc">300g aprox. Alérgenos: gluten (guarnición)</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Rabo de toro a la cordobesa</h3><div class="item-dots"></div><span class="item-price">19€</span></div><p class="item-desc">Alérgenos: gluten, sulfitos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Cochinillo</h3><div class="item-dots"></div><span class="item-price">23€</span></div><p class="item-desc">Alérgenos: gluten, sulfitos, lácteos</p></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page">
+                    <div class="page-content">
+                        <span class="page-number left">6</span>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Paletilla lechal</h3><div class="item-dots"></div><span class="item-price">24€</span></div><p class="item-desc">Alérgenos: gluten, sulfitos, lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Abanico de ibéricos</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">A la plancha. Alérgenos: moluscos (guarnición)</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Chuletillas de lechal</h3><div class="item-dots"></div><span class="item-price">3€/Ud</span></div><p class="item-desc">Alérgenos: moluscos (guarnición)</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Solomillo de vaca</h3><div class="item-dots"></div><span class="item-price">22€</span></div><p class="item-desc">Alérgenos: moluscos (guarnición)</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Chuletón de buey</h3><div class="item-dots"></div><span class="item-price">45€/kg</span></div></article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 5: Caza y Menú Degustación -->
+            <div class="leaf" data-leaf="4">
+                <div class="face front leaf-page">
+                    <div class="page-content">
+                        <span class="page-number right">7</span>
+                        <h2 class="section-title">Nos vamos de Caza</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Sushi de caza</h3><div class="item-dots"></div><span class="item-price">16€</span></div><p class="item-desc">Alérgenos: pescado, sulfitos, soja</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tataki de corzo</h3><div class="item-dots"></div><span class="item-price">18€</span></div><p class="item-desc">Con praliné de pistacho. Alérgenos: frutos cáscara, soja, apio</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Ensaladilla de perdiz</h3><div class="item-dots"></div><span class="item-price">15€</span></div><p class="item-desc">Alérgenos: sulfitos, huevos, gluten</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Cachopo de ciervo</h3><div class="item-dots"></div><span class="item-price">20€</span></div><p class="item-desc">Alérgenos: gluten, lácteos, huevos, altramuz</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Lomo de gamo</h3><div class="item-dots"></div><span class="item-price">22€</span></div><p class="item-desc">Con puré de manzana. Alérgenos: sulfitos, apio, lácteos</p></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page">
+                    <div class="page-content">
+                        <span class="page-number left">8</span>
+                        <h2 class="section-title">Menú Degustación</h2>
+                        <div class="menu-degustacion-box">
+                            <p class="price-big">35€</p>
+                            <p class="subtitle-deg">IVA incluido. Servicio de pan y agua incluidos.</p>
+                            
+                            <h3 class="submenu-title">Entrantes</h3>
+                            <ul class="deg-list">
+                                <li>Ensalada gourmet con crema de mango</li>
+                                <li>Croqueta de jamón ibérico</li>
+                                <li>Flor de alcachofa con foie</li>
+                                <li>Sardina curada con fondo de aguacate</li>
+                            </ul>
+
+                            <h3 class="submenu-title">Segundos a elegir</h3>
+                            <ul class="deg-list small">
+                                <li>Chuletillas de lechal</li>
+                                <li>Abanico ibérico a la plancha</li>
+                                <li>Magret de pato con mermelada de higos</li>
+                                <li>Rabo de toro a la cordobesa</li>
+                                <li>Bacalao a la riojana</li>
+                                <li>Cachopo de ciervo</li>
+                                <li>Tataki de atún rojo</li>
+                                <li>Pulpo a la brasa con crema de patata</li>
+                            </ul>
+                            <h3 class="submenu-title">Postre</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 6: Postres y Vinos -->
+            <div class="leaf" data-leaf="5">
+                <div class="face front leaf-page">
+                    <div class="page-content">
+                        <span class="page-number right">9</span>
+                        <h2 class="section-title">Postres</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Brownie de chocolate</h3><div class="item-dots"></div><span class="item-price">5,8€</span></div><p class="item-desc">Con helado de vainilla. Alérgenos: gluten, huevos, lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tarta de queso</h3><div class="item-dots"></div><span class="item-price">5,8€</span></div><p class="item-desc">Con helado de nata. Alérgenos: huevos, lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Pannacotta choco blanco</h3><div class="item-dots"></div><span class="item-price">5,5€</span></div><p class="item-desc">Helado de choco negro. Alérgenos: lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tarta queso y café</h3><div class="item-dots"></div><span class="item-price">5,8€</span></div><p class="item-desc">Con helado de nata. Alérgenos: huevos, lácteos</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Bizcocho de manzana</h3><div class="item-dots"></div><span class="item-price">5,9€</span></div><p class="item-desc">Zanahoria, choco y crema inglesa. Alérgenos: gluten, frutos cáscara</p></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tiramisú</h3><div class="item-dots"></div><span class="item-price">5,2€</span></div><p class="item-desc">Receta clásica</p></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page dark">
+                    <div class="page-content">
+                        <span class="page-number left">10</span>
+                        <h2 class="section-title">Vinos Tintos</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">GSM (Castaño)</h3><div class="item-dots"></div><span class="item-price">15,5€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Santa (Castaño)</h3><div class="item-dots"></div><span class="item-price">23€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Solanera (Castaño)</h3><div class="item-dots"></div><span class="item-price">24€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Colección (Castaño)</h3><div class="item-dots"></div><span class="item-price">24€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Consentido syrah (Purisima)</h3><div class="item-dots"></div><span class="item-price">15,5€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Old hands roble (Purisima)</h3><div class="item-dots"></div><span class="item-price">16,5€</span></div></article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 7: Vinos II y Bebidas -->
+            <div class="leaf" data-leaf="6">
+                <div class="face front leaf-page dark">
+                    <div class="page-content">
+                        <span class="page-number right">11</span>
+                        <h2 class="section-title">Vinos Tintos II</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Premium (Purisima)</h3><div class="item-dots"></div><span class="item-price">22€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Filarmonia (Purisima)</h3><div class="item-dots"></div><span class="item-price">16,5€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Tranco (Barahonda)</h3><div class="item-dots"></div><span class="item-price">14,5€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Barahonda barrica</h3><div class="item-dots"></div><span class="item-price">16€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Summum (Barahonda)</h3><div class="item-dots"></div><span class="item-price">25€</span></div></article>
+                    </div>
+                </div>
+                <div class="face back leaf-page dark">
+                    <div class="page-content">
+                        <span class="page-number left">12</span>
+                        <h2 class="section-title">Blancos y Bebidas</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Castaño blanco</h3><div class="item-dots"></div><span class="item-price">14,5€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Barahonda blanco</h3><div class="item-dots"></div><span class="item-price">14,5€</span></div></article>
+                        <div class="page-divider light"></div>
+                        <h2 class="section-title">Bebidas</h2>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Agua 1L / 500ml</h3><div class="item-dots"></div><span class="item-price">2,8€ / 1,8€</span></div></article>
+                        <article class="menu-item"><div class="item-header"><h3 class="item-name">Refrescos / Caña</h3><div class="item-dots"></div><span class="item-price">2,5€</span></div></article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAF 8: Notas & Back Cover -->
+            <div class="leaf" data-leaf="7">
+                <div class="face front leaf-page">
+                    <div class="page-content center-vert">
+                        <span class="page-number right">13</span>
+                        <div class="notes-box">
+                            <img src="assets/images/logo.png" alt="Logo" class="notes-logo">
+                            <p class="disclaimer">
+                                Información obtenida de la carta digital oficial de La Zaranda.
+                            </p>
+                            <p class="contact-line">Ciudad Real • Tel. 661 58 74 99</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Back: Back Cover -->
+                <div class="face back leaf-cover back-cover">
+                    <div class="cover-content">
+                        <div class="divider"></div>
+                        <img src="assets/images/logo.png" alt="La Zaranda Logo" class="carta-logo small">
+                        <p class="back-text">Gracias por su visita</p>
+                        <div class="divider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="carta.js"></script>
+</body>
+</html>
