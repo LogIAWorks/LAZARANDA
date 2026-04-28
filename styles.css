@@ -1181,7 +1181,8 @@ footer {
     .collage-item.item-1,
     .collage-item.item-2,
     .collage-item.item-3,
-    .collage-item.item-4 {
+    .collage-item.item-4,
+    .collage-item.item-5 {
         grid-column: 1;
         grid-row: auto;
         min-height: 180px;
