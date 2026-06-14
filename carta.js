@@ -34,22 +34,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Page label for the nav counter
     const mobileLabels = [
-        'Cubierta',
-        'Índice',
-        'Pág. 1: Ensaladas',
-        'Pág. 2: Algo más',
-        'Pág. 3: Pescados I',
-        'Pág. 4: Pescados II',
-        'Pág. 5: Nuestras Carnes I',
-        'Pág. 6: Nuestras Carnes II',
-        'Pág. 7: Nos vamos de Caza',
-        'Pág. 8: Menú Degustación',
-        'Pág. 9: Postres',
-        'Pág. 10: Vinos Tintos',
-        'Pág. 11: Vinos Tintos II',
-        'Pág. 12: Blancos y Bebidas',
-        'Notas',
-        'Contraportada'
+        'Cubierta',                          // 0: LEAF 0 front
+        'Índice',                            // 1: LEAF 0 back
+        'Pág. 1: Menú Degustación',          // 2: LEAF 1 front
+        'Pág. 2: Nuestras Carnes',           // 3: LEAF 1 back
+        'Pág. 3: Nuestras Carnes',           // 4: LEAF 2 front
+        'Pág. 4: Nos vamos de Caza',         // 5: LEAF 2 back
+        'Pág. 5: Nos vamos de Caza',         // 6: LEAF 3 front
+        'Pág. 6: Algo del mar',              // 7: LEAF 3 back
+        'Pág. 7: Algo del mar',              // 8: LEAF 4 front
+        'Pág. 8: Ensaladas',                 // 9: LEAF 4 back
+        'Pág. 9: Algo más',                  // 10: LEAF 5 front
+        'Pág. 10: Croquetas y más',          // 11: LEAF 5 back
+        'Pág. 11: Desayunos y Gildas',       // 12: LEAF 6 front
+        'Pág. 12: Postres',                  // 13: LEAF 6 back
+        'Pág. 13: Vinos Tintos',             // 14: LEAF 7 front
+        'Pág. 14: Vinos Tintos II',          // 15: LEAF 7 back
+        'Pág. 15: Blancos y Bebidas',        // 16: LEAF 8 front
+        'Contraportada'                      // 17: LEAF 8 back
     ];
 
     function buildMobileViewer() {
@@ -199,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function desktopNext() {
         if (currentLeaf < totalLeaves) {
             leaves[currentLeaf].classList.add('flipped');
-            setTimeout(updateZIndexes, 300);
+            setTimeout(updateZIndexes, 350);
             currentLeaf++;
             updateDesktopNav();
             handleResize();
@@ -210,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentLeaf > 0) {
             currentLeaf--;
             leaves[currentLeaf].classList.remove('flipped');
-            setTimeout(updateZIndexes, 300);
+            setTimeout(updateZIndexes, 350);
             updateDesktopNav();
             handleResize();
         }
